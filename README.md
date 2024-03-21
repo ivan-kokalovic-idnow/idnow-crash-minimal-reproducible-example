@@ -3,7 +3,7 @@
 This repository is a minimal reproducible demo of an IDnow crash that we are experiencing. 
 
 ## The issue
-As soon as both the` IDnow SDK` and `@stripe/stripe-react-native` packages are both added into the project, IDnow crashes when attempting to choose the video call option. Removing the Stripe package seems to prevent this issue from occuring.
+As soon as both the `IDnow SDK` and `@stripe/stripe-react-native` packages are both added into the project, IDnow crashes when attempting to choose the video call option. Removing the Stripe package seems to prevent this issue from occuring.
 
 A clip of the issue:
 
