@@ -1,0 +1,96 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        buildToolsVersion = "31.0.0"
+        minSdkVersion = 23
+        compileSdkVersion = 33
+        targetSdkVersion = 33
+        supportLibVersion = "28.0.0" // some pre-AndroidX libs might rely on this value
+        kotlinVersion = '1.8.0'
+
+        // We use NDK 23 which has both M1 support and is the side-by-side NDK version from AGP.
+        ndkVersion = "23.1.7779620"
+    }
+    repositories {
+        google()
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.3.1")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url("$rootDir/../node_modules/react-native/android")
+        }
+        maven {
+            // Android JSC is installed from npm
+            url("$rootDir/../node_modules/jsc-android/dist")
+        }
+
+        google()
+        jcenter() {
+            // This limits jcenter use to only those libraries and nothing else
+            // There should be no issues since jcenter will allow downloads indefinitely
+            // https://developer.android.com/studio/build/jcenter-migration
+            content {
+                // We cannot remove the following two modules, since they are required by idnow
+                // We need to wait for them to provide a SDK version which doesn't rely on them
+                // Open issue: https://github.com/idnow/de.idnow.android/issues/98
+                includeModule("ly.count.android", "sdk")
+                includeModule("me.relex", "circleindicator")
+            }
+        }
+        mavenCentral {
+            // We don't want to fetch react-native from Maven Central as there are
+            // older versions over there.
+            content {
+                excludeGroup "com.facebook.react"
+            }
+        }
+
+          // IDnow SDK
+        maven {
+            url = uri("https://repo.authada.de/public/")
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username AUTHADA_USER
+                password AUTHADA_PASS
+            }
+        }
+        gradlePluginPortal()
+        mavenCentral()
+
+        maven {
+          /**
+          If jitpack.io is unavailable, we will use this maven repository hosted on github as a fallback.
+          This allows us to resolve dependencies and build the app even if jitpack.io is down.
+          Note that if you update the version of a dependency resolved through jitpack, you should also update
+          the version in the fallback repository. Refer to the repository's README for a list of dependencies
+          that need to be updated if their version changes.
+          **/
+          url "https://github.com/SowaLabs/jitpack.io-fallback-repository/raw/main/"
+        }
+
+        maven { url 'https://jitpack.io' }
+        // braze
+        maven { url "https://appboy.github.io/appboy-android-sdk/sdk" }
+
+        // Idnow SDK
+        maven {
+            url "https://raw.githubusercontent.com/idnow/de.idnow.android/master"
+        }
+        // Idnow Autoident
+        maven {
+          url "https://raw.githubusercontent.com/idnow/de.idnow.android.sdk/master"
+        }
+    }
+}
