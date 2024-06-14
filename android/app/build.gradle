@@ -160,15 +160,14 @@ dependencies {
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 
-    implementation 'de.idnow.android.sdk:idnow-platform:5.7.0'
-    implementation 'de.idnow.sdk:idnow-android-sdk:7.5.0.1'
-    implementation 'de.idnow.android.eid:idnow-android-eid-sdk:2.7.4'
+    implementation 'de.idnow.sdk:idnow-android-sdk:8.1.0'
+    implementation 'de.idnow.android.eid:idnow-android-eid-sdk:2.8.1'
 
-    implementation('de.idnow.sdk:idnow-android-sdk:7.5.0.1') {
+    implementation('de.idnow.sdk:idnow-android-sdk:8.1.0') {
         exclude group: 'com.github.barteksc', module: 'AndroidPdfViewerV1'
     }
 
-    implementation('de.idnow.android.eid:idnow-android-eid-sdk:2.7.4') {
+    implementation('de.idnow.android.eid:idnow-android-eid-sdk:2.8.1') {
         exclude group: 'com.github.barteksc', module: 'AndroidPdfViewerV1'
     }
 
